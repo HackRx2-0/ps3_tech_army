@@ -24,6 +24,8 @@ public class Manager : MonoBehaviour
 
     public ParentObjectScript parentObjectController;
 
+    public GameObject ExploreBackButtonUI;
+
     void Start()
     {
         _initialGazeScale = gaze.transform.localScale;
@@ -140,17 +142,17 @@ public class Manager : MonoBehaviour
 
     }
 
-    public void activateExplore()
+    public void activateExploreButtonUI()
     {
-        Debug.Log("EXplore actiavaetd");
-        parentObjectController.disableMainMenu();
-        parentObjectController.enableExploreSection();
+        Debug.Log("valle");
+        ExploreBackButtonUI.SetActive(true);
     }
 
 
     public void disableExplore()
     {
-
+        ExploreBackButtonUI.SetActive(false);
+        parentObjectController.disableExploreSection();
     }
 
     public void activateEstore()

@@ -27,11 +27,13 @@ public class ParentObjectScript : MonoBehaviour
     {
         disableMainMenu();
         exploreSectionController.enable();
+        Manager.ins.activateExploreButtonUI();
     }
 
     public void disableExploreSection()
     {
         exploreSectionController.disable();
+        enableMainMenu();
     }
 
     public void disableMainMenu()
