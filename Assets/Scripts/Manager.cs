@@ -99,4 +99,67 @@ public class Manager : MonoBehaviour
     {
         introMsg.SetActive(false);
     }
+
+    public void activateMainMenu()
+    {
+
+    }
+
+    public void disableMainMenu()
+    {
+
+    }
+
+    public void activateQuiz()
+    {
+
+    }
+
+    public void disableQuiz()
+    {
+
+    }
+
+    public void activateInvestSim()
+    {
+
+    }
+
+    public void disableInvestSim()
+    {
+
+    }
+
+    public void activateProfile()
+    {
+
+    }
+
+    public void disableProfile()
+    {
+
+    }
+
+    public void activateExplore()
+    {
+        Debug.Log("EXplore actiavaetd");
+        parentObjectController.disableMainMenu();
+        parentObjectController.enableExploreSection();
+    }
+
+
+    public void disableExplore()
+    {
+
+    }
+
+    public void activateEstore()
+    {
+
+    }
+
+    public void disableEstore()
+    {
+
+    }
 }
