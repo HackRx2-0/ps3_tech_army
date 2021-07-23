@@ -21,6 +21,8 @@ namespace Michsky.UI.ModernUIPack
         public bool enableLoop;
         [Range(0, 100)] public float specifiedValue;
 
+        public string suffix = "%";
+
         void Update()
         {
             if (currentPercent <= 100 && isOn == true && enableSpecified == false)
@@ -42,7 +44,7 @@ namespace Michsky.UI.ModernUIPack
                 currentPercent = 0;
 
             loadingBar.GetComponent<Image>().fillAmount = currentPercent / 100;
-            textPercent.GetComponent<TextMeshProUGUI>().text = ((int)currentPercent).ToString("F0") + "%";
+            textPercent.GetComponent<TextMeshProUGUI>().text = ((int)currentPercent).ToString("F0") + suffix;
         }
     }
 }

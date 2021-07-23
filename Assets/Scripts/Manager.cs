@@ -124,20 +124,10 @@ public class Manager : MonoBehaviour
 
     public void activateInvestSim()
     {
-
+        parentObjectController.enableInvestSimObject();
     }
 
     public void disableInvestSim()
-    {
-
-    }
-
-    public void activateProfile()
-    {
-
-    }
-
-    public void disableProfile()
     {
 
     }
@@ -153,6 +143,11 @@ public class Manager : MonoBehaviour
     {
         ExploreBackButtonUI.SetActive(false);
         parentObjectController.disableExploreSection();
+    }
+
+    public void activateExploreSectionUI()
+    {
+
     }
 
     public void activateEstore()

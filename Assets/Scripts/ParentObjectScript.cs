@@ -11,7 +11,13 @@ public class ParentObjectScript : MonoBehaviour
 
     public ExploreSectionController exploreSectionController;
     public GameObject mainMenu;
-    
+
+    public GameObject profileSection;
+    public Animator profileAnimator;
+
+    public GameObject investSimObject;
+    public Animator investSimAnimator;
+
     public void playWelcomeAnimation()
     {
         welcomObjectAnimation.enabled = true;
@@ -46,4 +52,19 @@ public class ParentObjectScript : MonoBehaviour
         mainGameObject.SetActive(true);
         mainGameObjectAnimation.enabled = true;
     }
+
+    public void enableProfileSection()
+    {
+        profileSection.SetActive(true);
+        profileAnimator.enabled = true;
+        disableMainMenu();
+    }
+
+    public void enableInvestSimObject()
+    {
+        investSimObject.SetActive(true);
+        investSimAnimator.enabled = true;
+        disableMainMenu();
+    }
+
 }
