@@ -186,7 +186,8 @@ namespace GoogleARCore.Examples.HelloAR
                         DetectedPlane detectedPlane = hit.Trackable as DetectedPlane;
                         if (detectedPlane.PlaneType == DetectedPlaneType.Vertical)
                         {
-                            prefab = GameObjectVerticalPlanePrefab;
+                            //prefab = GameObjectVerticalPlanePrefab;
+                            prefab = GameObjectHorizontalPlanePrefab;
                         }
                         else
                         {
@@ -198,8 +199,20 @@ namespace GoogleARCore.Examples.HelloAR
                         prefab = GameObjectHorizontalPlanePrefab;
                     }
 
+                    GameObject gameObject;
                     // Instantiate prefab at the hit pose.
-                    var gameObject = Instantiate(prefab, hit.Pose.position, hit.Pose.rotation);
+                    if (prefab == GameObjectHorizontalPlanePrefab)
+                    {
+                        if (!Manager.ins.parentObjectPlaced)
+                        {
+                            gameObject = Instantiate(prefab, hit.Pose.position, hit.Pose.rotation);
+                            Manager.ins.parentObjectPlaced = true;
+                        }
+                        else return;
+                    }
+                    else
+                        gameObject = Instantiate(prefab, hit.Pose.position, hit.Pose.rotation);
+
 
                     // Compensate for the hitPose rotation facing away from the raycast (i.e.
                     // camera).

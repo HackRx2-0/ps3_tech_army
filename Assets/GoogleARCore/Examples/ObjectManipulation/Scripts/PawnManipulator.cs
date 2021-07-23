@@ -23,11 +23,18 @@ namespace GoogleARCore.Examples.ObjectManipulation
     using GoogleARCore;
     using UnityEngine;
 
+#if UNITY_EDITOR
+    // Set up touch input propagation while using Instant Preview in the editor.
+    using Input = InstantPreviewInput;
+
+#endif
+
     /// <summary>
     /// Controls the placement of objects via a tap gesture.
     /// </summary>
     public class PawnManipulator : Manipulator
     {
+        bool check = true;
         /// <summary>
         /// The first-person camera being used to render the passthrough camera image (i.e. AR
         /// background).
@@ -65,8 +72,13 @@ namespace GoogleARCore.Examples.ObjectManipulation
         /// <param name="gesture">The current gesture.</param>
         protected override void OnEndManipulation(TapGesture gesture)
         {
-            if (gesture.WasCancelled)
+
+#if UNITY_EDITOR
+            check = false;
+#endif
+            if (gesture.WasCancelled && check)
             {
+                Debug.Log("gesture.WasCancelled");
                 return;
             }
 
@@ -75,6 +87,9 @@ namespace GoogleARCore.Examples.ObjectManipulation
             {
                 return;
             }
+
+            if (Manager.ins.parentObjectPlaced)
+                return;
 
             // Raycast against the location the player touched to search for planes.
             TrackableHit hit;
@@ -93,6 +108,8 @@ namespace GoogleARCore.Examples.ObjectManipulation
                 }
                 else
                 {
+                    Manager.ins.parentObjectPlaced = true;
+                    Manager.ins.disableIntro();
                     Debug.Log("hit detected");
                     // Instantiate game object at the hit pose.
                     var gameObject = Instantiate(PawnPrefab, hit.Pose.position, hit.Pose.rotation);
@@ -113,6 +130,8 @@ namespace GoogleARCore.Examples.ObjectManipulation
 
                     // Select the placed object.
                     manipulator.GetComponent<Manipulator>().Select();
+                    Manager.ins.parentObjectController = gameObject.GetComponent<ParentObjectScript>();
+                    Manager.ins.parentObjectController.playWelcomeAnimation();
                 }
             }
         }
